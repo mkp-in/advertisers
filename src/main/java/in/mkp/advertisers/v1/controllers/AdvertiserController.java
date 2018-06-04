@@ -1,9 +1,8 @@
 package in.mkp.advertisers.v1.controllers;
 
-import java.util.Optional;
-
 import in.mkp.advertisers.v1.entities.Advertiser;
-import in.mkp.advertisers.v1.repositories.AdvertiserRepository;
+import in.mkp.advertisers.v1.entities.AdvertiserCreditLimit;
+import in.mkp.advertisers.v1.services.AdvertiserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -21,35 +20,52 @@ import org.springframework.web.bind.annotation.RestController;
 public class AdvertiserController {
 
     @Autowired
-    private AdvertiserRepository advertiserRepository;
+    private AdvertiserService advertiserService;
 
     @GetMapping("/get")
-    public Optional<Advertiser> getAdvertiser(@RequestParam(value = "id", required = true) final Integer id) {
-        return this.advertiserRepository.findById(id);
-    }
-
-    @DeleteMapping("/delete")
-    public void deleteAdvertiser(@RequestParam(value = "id", required = true) final Integer id) {
-       this.advertiserRepository.deleteById(id);
+    public Advertiser getAdvertiser(@RequestParam(value = "id", required = true) final Integer id) {
+        return this.advertiserService.findAdvertiserById(id);
     }
 
     @PostMapping("/insert")
     public ResponseEntity<String> insertAdvertiser(@RequestBody final Advertiser advertiser) {
-        final Advertiser result = this.advertiserRepository.save(advertiser);
+        this.advertiserService.insertAdvertiser(advertiser);
         return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
+    }
+
+    @DeleteMapping("/delete")
+    public void deleteAdvertiser(@RequestParam(value = "id", required = true) final Integer id) {
+        this.advertiserService.deleteAdvertiser(id);
     }
 
     @PutMapping("/update")
     public ResponseEntity<String> updateAdvertiser(@RequestParam(value = "id", required = true) final Integer id, @RequestBody final Advertiser advertiser) {
-        Optional<Advertiser> result = this.advertiserRepository.findById(id);
+        final Advertiser result = this.advertiserService.findAdvertiserById(id);
 
-        if (!result.isPresent()) {
+        if (result == null) {
             return ResponseEntity.notFound().build();
         }
         advertiser.setId(id);
-        this.advertiserRepository.save(advertiser);
+        this.advertiserService.updateAdvertiser(advertiser);
         return ResponseEntity.noContent().build();
     }
 
+    @GetMapping("/checkLimit")
+    public AdvertiserCreditLimit checkLimit(@RequestParam(value = "id", required = true) final Integer id,
+                                            @RequestParam(value = "requested", required = true) final Long requestedTransaction) {
+        final Advertiser result = this.advertiserService.findAdvertiserById(id);
+        final AdvertiserCreditLimit advertiserCreditLimit = new AdvertiserCreditLimit();
+        advertiserCreditLimit.setRequestedTransaction(requestedTransaction);
+        if (result == null) {
+            advertiserCreditLimit.setAdvertiserNotFound(true);
+        }
+        else {
+            advertiserCreditLimit.setAdvertiser(result);
+            if (result.getCreditLimit() >= requestedTransaction) {
+                advertiserCreditLimit.setEnoughCredit(true);
+            }
+        }
+        return advertiserCreditLimit;
 
+    }
 }
