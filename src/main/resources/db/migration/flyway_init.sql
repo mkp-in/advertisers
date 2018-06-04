@@ -1,0 +1,9 @@
+DROP TABLE IF EXISTS advertisers;
+CREATE TABLE advertisers
+(
+  id BIGINT AUTO_INCREMENT,
+  name VARCHAR(256) NOT NULL UNIQUE,
+  contact_name VARCHAR(256) NOT NULL,
+  credit_limit BIGINT DEFAULT 0,
+  PRIMARY KEY (id)
+);
