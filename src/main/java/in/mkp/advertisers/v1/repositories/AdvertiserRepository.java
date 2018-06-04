@@ -6,6 +6,4 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface AdvertiserRepository extends JpaRepository<Advertiser, Integer> {
-
-    Advertiser findAdvertiserByName(String advertiserName);
 }
