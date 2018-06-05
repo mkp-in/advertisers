@@ -18,13 +18,13 @@ ___
 ### API
 
     
-    Type   | Method | URL       | Returns
-    -------|--------|-----------|--------
-    Get advertiser| GET| http://localhost:8080/api/advertiser/get?id=2| 200
-    Delete advertiser| DELETE | http://localhost:8080/api/advertiser/delete?id=2 | 200
-    Post new advertiser |POST | http://localhost:8080/api/advertiser/insert | 204
-    Put update advertiser | PUT | http://localhost:8080/api/advertiser/update?id=3 | 204
-    Get to check credit limit for transaction| GET | http://localhost:8080/api/advertiser/checkLimit?id=1&requested=5000 | 200
+    Type                      | Method | URL                                                                 | Returns
+    ------------------------- |--------|---------------------------------------------------------------------|--------::
+    Get advertiser            | GET    | http://localhost:8080/api/advertiser/get?id=2                       | 200
+    Delete advertiser         | DELETE | http://localhost:8080/api/advertiser/delete?id=2                    | 200
+    Post new advertiser       | POST   | http://localhost:8080/api/advertiser/insert                         | 204
+    Put update advertiser     | PUT    | http://localhost:8080/api/advertiser/update?id=3                    | 204
+    Get to check credit limit | GET    | http://localhost:8080/api/advertiser/checkLimit?id=1&requested=5000 | 200
     
 Example JSON for using POST:
 
@@ -58,6 +58,8 @@ These are located at:
 ### Actuator
 
 Running on port 8090
+   
+    http://localhost:8090/mgmt/
 
  
 
