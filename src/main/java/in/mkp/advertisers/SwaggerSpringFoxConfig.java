@@ -17,8 +17,7 @@ public class SwaggerSpringFoxConfig extends WebMvcConfigurationSupport {
     public Docket api(){
         return new Docket(DocumentationType.SWAGGER_2)
                 .select()
-                .apis(RequestHandlerSelectors
-                        .basePackage("in.mkp.advertisers"))
+                .apis(RequestHandlerSelectors.basePackage("in.mkp.advertisers"))
                 .paths(regex("/api/advertiser/*"))
                 .build();
 

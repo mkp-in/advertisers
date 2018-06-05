@@ -66,6 +66,5 @@ public class AdvertiserController {
             }
         }
         return advertiserCreditLimit;
-
     }
 }
