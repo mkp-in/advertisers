@@ -74,6 +74,54 @@ Running on port 8090
    
     http://localhost:8090/mgmt/
 
+### Docker
+
+Before you can run docker, alter the repository section in pom.xml to specify your repository.
+
+                    <configuration>
+                        <repository>......</repository>
+                        <tag>${project.version}</tag>
+                        <buildArgs>
+                            <JAR_FILE>target/${project.build.finalName}.jar</JAR_FILE>
+                        </buildArgs>
+                    </configuration>
+
+
+Run these steps to run the project using docker:
+
+* Build the image using the following command:
+
+
+    >  mvn clean install dockerfile:build
+
+The above command will build the image to run the docker container. If you are running this the first time, it will take a bit longer since the different layers to build the images are being downloaded. Subsequent runs should be lot faster.
+
+* Verify the docker image is created:
+
+
+    > docker images | grep <REPOSITORY_NAME>
+
+Replace <REPOSITORY_NAME> by what you put in the pom.xml above. 
+
+* Run the docker container:
+
+
+    > docker run -d -p 5000:8080 <REPOSITORY_NAME>:0.SNAPSHOT
+    
+The above command will run docker on port 5000 mapped to 8080 inside the container. You can query the container is running by hitting: http://localhost:5000/api/advertiser/get?id=3
+
+The above command will also return a container id. You can use that id to kill the running container using the command:
+
+
+    > docker kill <CONTAINER_ID>
+     
+
+
+    
+### Logging
+
+Logs are written to logs/ directory    
+
  
 
     
