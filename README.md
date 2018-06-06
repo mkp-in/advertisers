@@ -48,9 +48,12 @@ There are two ways to run the project:
 
 * **Method 1**
         
-        
-    $ mvn clean package    # this command will build the jar 
+         
+    $ mvn clean package    # this command will build the jar
+     
     $ java -jar target/springbootlearning-0.SNAPSHOT.jar # this command will run the application
+    
+    
     
 * **Method 2**
 
