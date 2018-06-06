@@ -48,12 +48,14 @@ There are two ways to run the project:
 
 * **Method 1**
 
+    
     $ mvn clean package    # this command will build the jar
      
     $ java -jar target/springbootlearning-0.SNAPSHOT.jar # this command will run the application
 
 * **Method 2**
 
+    
     $ mvn clean spring-boot:run
 
 
@@ -91,14 +93,14 @@ Run these steps to run the project using docker:
 * Build the image using the following command:
 
 
-     $  mvn clean install dockerfile:build
+    $  mvn clean install dockerfile:build
 
 The above command will build the image to run the docker container. If you are running this the first time, it will take a bit longer since the different layers to build the images are being downloaded. Subsequent runs should be lot faster.
 
 * Verify the docker image is created:
 
 
-     $ docker images | grep <REPOSITORY_NAME>
+    $ docker images | grep <REPOSITORY_NAME>
 
 Replace <REPOSITORY_NAME> by what you put in the pom.xml above. 
 
@@ -122,7 +124,13 @@ The above command will also return a container id. You can use that id to kill t
 Logs are written to logs/ directory    
 
  
+### JAVA 9/10 ERROR
 
+If you are running Java version above 8, you might get the following error:
+
+    [ERROR] Failed to execute goal org.apache.maven.plugins:maven-compiler-plugin:3.7.0:compile (default-compile) on project advertisers: Fatal error compiling: java.lang.ExceptionInInitializerError: com.sun.tools.javac.code.TypeTags -> [Help 1]
+    
+To fix the above, set JAVA_HOME to appropriate version.    
     
   
      
