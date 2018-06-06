@@ -49,20 +49,20 @@ There are two ways to run the project:
 * **Method 1**
         
         
-    > mvn clean package    # this command will build the jar 
-    > java -jar target/springbootlearning-0.SNAPSHOT.jar # this command will run the application
+    $ mvn clean package    # this command will build the jar 
+    $ java -jar target/springbootlearning-0.SNAPSHOT.jar # this command will run the application
     
 * **Method 2**
 
 
-    > mvn clean spring-boot:run
+    $ mvn clean spring-boot:run
     
 
 ### Jacoco Report
 
 To generate the Jacoco code coverage reports, use the following command:
 
-    > mvn clean package jacoco:report   # this command will build the jar and produce the Jacoco report
+    $ mvn clean package jacoco:report   # this command will build the jar and produce the Jacoco report
 
 Location of generated reports:
  
@@ -92,28 +92,28 @@ Run these steps to run the project using docker:
 * Build the image using the following command:
 
 
-    >  mvn clean install dockerfile:build
+     $  mvn clean install dockerfile:build
 
 The above command will build the image to run the docker container. If you are running this the first time, it will take a bit longer since the different layers to build the images are being downloaded. Subsequent runs should be lot faster.
 
 * Verify the docker image is created:
 
 
-    > docker images | grep <REPOSITORY_NAME>
+     $ docker images | grep <REPOSITORY_NAME>
 
 Replace <REPOSITORY_NAME> by what you put in the pom.xml above. 
 
 * Run the docker container:
 
 
-    > docker run -d -p 5000:8080 <REPOSITORY_NAME>:0.SNAPSHOT
+     $ docker run -d -p 5000:8080 <REPOSITORY_NAME>:0.SNAPSHOT
     
 The above command will run docker on port 5000 mapped to 8080 inside the container. You can query the container is running by hitting: http://localhost:5000/api/advertiser/get?id=3
 
 The above command will also return a container id. You can use that id to kill the running container using the command:
 
 
-    > docker kill <CONTAINER_ID>
+    $ docker kill <CONTAINER_ID>
      
 
 
