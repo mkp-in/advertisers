@@ -44,14 +44,27 @@ Example JSON for PUT
     
 ### Running the code:
 
-On the command line type in:
-    
-    > mvn clean package jacoco:report   # this command will build the jar and produce the Jacoco report
+There are two ways to run the project:
+
+* **Method 1**
+        
+        
+    > mvn clean package    # this command will build the jar 
     > java -jar target/springbootlearning-0.SNAPSHOT.jar # this command will run the application
     
+* **Method 2**
+
+
+    > mvn clean spring-boot:run
+    
+
 ### Jacoco Report
 
-These are located at:
+To generate the Jacoco code coverage reports, use the following command:
+
+    > mvn clean package jacoco:report   # this command will build the jar and produce the Jacoco report
+
+Location of generated reports:
  
     target/site/jacoco/index.html
     
